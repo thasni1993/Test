@@ -157,3 +157,19 @@ plt.xlabel("Predicted Class")
 plt.ylabel("True Class")
 plt.show()
 
+#Plotting these three classifier accuracy in one plot
+# Accuracy values
+accuracy_values = [dt_accuracy, svm_accuracy, rf_accuracy]
+
+# Classifier names
+classifier_names = ['Decision Tree', 'SVM', 'Random Forest']
+
+# Plotting
+plt.figure(figsize=(8, 6))
+plt.bar(classifier_names, accuracy_values)
+plt.title('Accuracy Comparison')
+plt.xlabel('Classifier')
+plt.ylabel('Accuracy')
+plt.ylim(0, 1)
+plt.show()
+

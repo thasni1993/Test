@@ -2,10 +2,12 @@
 
 #import the packages
 import pandas as pd
+import numpy as np
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler,LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
@@ -23,14 +25,14 @@ print(stud.isnull().sum())
 #To check the duplicate values
 print(stud.duplicated().sum())
 
+# Split the dataset into features (X) and the target variable (y)
+X = df.drop('Target', axis=1)
+y = df['Target']
+
 #Only the target column is non-numeric which we can convert to numeric
 le = LabelEncoder()
 y = le.fit_transform(y)
 print(y)
-
-# Split the dataset into features (X) and the target variable (y)
-X = df.drop('Target', axis=1)
-y = df['Target']
 
 # Count the number of instances for each class
 class_counts = df['Target'].value_counts()
@@ -50,7 +52,7 @@ smote = SMOTE(random_state=42)
 X_smote, y_smote = smote.fit_resample(X, y)
 
 # Calculate class distribution before and after resampling
-class_counts_before = y.value_counts()
+class_counts_before = y_series.value_counts()
 class_counts_undersampled = pd.Series(y_undersampled).value_counts()
 class_counts_oversampled = pd.Series(y_oversampled).value_counts()
 class_counts_smote = pd.Series(y_smote).value_counts()
